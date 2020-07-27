@@ -1,0 +1,10 @@
+{
+  "name": "node-robot",
+  "version": "1.0.0",
+  "description": "Automate control over web",
+  "main": "src/index.js",
+  "repository": "https://github.com/iddar/remote-hid",
+  "author": "iddar olivares <iddar@dbug.mx>",
+  "license": "MIT",
+  "private": false
+}
