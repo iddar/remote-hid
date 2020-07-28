@@ -6,5 +6,25 @@
   "repository": "https://github.com/iddar/remote-hid",
   "author": "iddar olivares <iddar@dbug.mx>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "start": "node server/index.js",
+    "tsc": "tsc",
+    "dev:start": "tsc && cp -r src/views server/ && node server/index.js",
+    "dev": "nodemon --watch src -e ts --exec yarn dev:start"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "4.15.2",
+    "robotjs": "^0.6.0",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.7",
+    "@types/node": "^14.0.26",
+    "@types/socket.io": "^2.1.10",
+    "nodemon": "^2.0.4",
+    "typescript": "^3.9.7"
+  }
 }
