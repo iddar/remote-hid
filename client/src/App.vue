@@ -1,15 +1,12 @@
 <template>
   <Mousepad @move="handlerMove" msg="Hello Vue 3.0 + Vite" />
   <div class="control">
-    <button @click.prevent="mouseClick">
-      Click
-    </button>
-    <button @click.prevent="sendKey('space')">
-      Pouse
-    </button>
-    <button @click.prevent="sendKey('f')">
-      Fullscreen
-    </button>
+    <button @click.prevent="mouseClick">Click</button>
+    <button @click.prevent="sendKey('space')">Pouse</button>
+    <button @click.prevent="sendKey('f')">Fullscreen</button>
+    <button @click.prevent="sendKey('audio_mute')">Mute</button>
+    <button @click.prevent="sendKey('audio_vol_down')">down vol</button>
+    <button @click.prevent="sendKey('audio_vol_up')">up vol</button>
   </div>
 </template>
 
