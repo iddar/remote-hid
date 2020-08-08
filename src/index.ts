@@ -1,22 +1,19 @@
-import express from 'express'
-import http from 'http'
-import MakeSocket from 'socket.io'
-import cors from 'cors'
-
+import { io, server } from './server'
 import { moveMouse, mouseClick, keyTap } from './robot'
+import activeWin, { getWindowInfo } from './activeWin'
 
-const app = express()
-const server = http.createServer(app)
-const io = MakeSocket(server)
+activeWin.on('change', (win) => {
+  delete win.id
+  io.emit('window_change', win)
+})
 
-app.use(cors())
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html');
-});
 
 io.on('connection', (socket) => {
   // console.log('a user connected');
+  getWindowInfo().then(win => {
+    delete win.id
+    io.emit('window_change', win)
+  })
 
   socket.on('movemouse', (position) => {
     moveMouse(position)
@@ -31,8 +28,8 @@ io.on('connection', (socket) => {
     keyTap(key)
   })
 
-});
+})
 
 server.listen(3000, () => {
-  console.log('listening on *:3000');
-});
+  console.log('listening on *:3000')
+})

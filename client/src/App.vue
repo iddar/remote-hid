@@ -1,4 +1,5 @@
 <template>
+  <h1>{{activeWin.name}}</h1>
   <Mousepad @move="handlerMove" msg="Hello Vue 3.0 + Vite" />
   <div class="control">
     <button @click.prevent="mouseClick">Click</button>
@@ -20,12 +21,15 @@ export default {
     Mousepad
   },
   setup () {
-    let socket = ref()
+    let socket = io('http://192.168.1.42:3000')
     const mouseClick = () => socket.emit('mouseClick')
     const sendKey = (key) => socket.emit('keypress', key)
+    const activeWin = ref({})
 
-    onMounted(() => {
-      socket = io('http://192.168.1.42:3000')
+    socket.on('window_change', (win) => {
+      activeWin.value = win
+      const winStr = Object.values(win).join(' ')
+      console.log(winStr, winStr.toLowerCase().includes('firefox'))
     })
 
     const handlerMove = (point) => {
@@ -33,10 +37,10 @@ export default {
     }
 
     return {
-      test: 1,
       mouseClick,
       handlerMove,
-      sendKey
+      sendKey,
+      activeWin
     }
   }
 }
